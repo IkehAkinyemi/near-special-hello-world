@@ -1,4 +1,4 @@
-# `near-sdk-as` Starter Kit
+# `near-sdk-as` Hello World Smart Contract
 
 This is a good project to use as a starting point for your AssemblyScript project.
 
