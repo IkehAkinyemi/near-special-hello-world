@@ -1,0 +1,1 @@
+near view $CONTRACT retrieveMsgByAcctId --account_id $OWNER '{"_timestamp": "HW-1637250336447317897"}'

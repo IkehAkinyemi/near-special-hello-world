@@ -1,0 +1,1 @@
+near call $CONTRACT signMessage --account_id $OWNER '{"_message": "Welcome to my Hello World smart contract, say your name and your hello message"}' --amount 0.52

@@ -4,19 +4,24 @@ import { Context } from "near-sdk-as";
 import { Timestamp, AccountId, TxFee } from "./../../utils";
 import { messages, HelloWorld } from "./model";
 
-export function signMessage(_message: string) {
+export function signMessage(_message: string): string {
+  const txDeposit = Context.attachedDeposit;
+  verifyShopTxFee(txDeposit);
+
   const id = generateuniqueID();
 
   const message = new HelloWorld(id, Context.sender, _message);
 
   messages.push(message);
+
+  return "✅ you've signed a new message"
 }
 
-export function retrieveMsgByAcctId(_acctId: AccountId): string {
+export function retrieveMsgByAcctId(_timestamp: Timestamp): string {
   let message = "";
 
   for (let x = 0; x < messages.length; x++) {
-    if (messages[x].signer == _acctId) {
+    if (messages[x].id == _timestamp) {
       message = messages[x].message;
     }
   }
@@ -35,20 +40,8 @@ export function retrieveAllMsg(): HelloWorld[]  {
   return newMessages;
 }
 
-export function deleteMsgById(_acctId: AccountId): string {
-  let Newmessages = new PersistentVector<HelloWorld>("newM");
-
-  for (let x = 0; x < messages.length; x++) {
-    if (messages[x].signer != _acctId) {
-      Newmessages.push(messages[x]);
-    }
-  }
-
-  return "Your message has successfully been deleted!";
-}
-
 function generateuniqueID(): Timestamp {
-  const id = "CS-" + Context.blockTimestamp.toString();
+  const id = "HW-" + Context.blockTimestamp.toString();
   return id;
 }
 
